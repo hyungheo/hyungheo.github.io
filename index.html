@@ -43,14 +43,14 @@
     // check that the response is ok... throw if bad, for example.
     };
 
-    async function doPaymentRequest() {
+    function doPaymentRequest() {
       const payment = new PaymentRequest(methodData, details, options);
       payment.addEventListener("shippingaddresschange", event => {
       // Process shipping address change
       });
       let paymentResponse;
       try {
-        paymentResponse = await payment.show();
+        paymentResponse = payment.show();
         // paymentResponse.methodName contains the selected payment method.
         // paymentResponse.details contains a payment method specific
         // response.
