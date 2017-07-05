@@ -6,6 +6,39 @@
   <div id="root"></div>
   <!--<script src="javascript/bundle.js"></script>-->
   <script>
+    const methodData = [{
+      supportedMethods : "basic-card" ,
+      data : {
+        supportedNetworks : [ 'visa' , 'mastercard' ],
+        supportedTypes : [ 'debit' ]
+      }
+      }, {
+      supportedMethods : "https://example.com/bobpay" ,
+      data : {
+        merchantIdentifier : "XXXX" ,
+        bobPaySpecificField : true
+      }
+    }];
+    
+    const details = {
+      id : "super-store-order-123-12312" ,
+      displayItems : [{
+        label : "Sub-total" ,
+        amount : { currency : "USD" , value : "55.00" }, // US$55.00
+      }, {
+        label : "Sales Tax" ,
+        amount : { currency : "USD" , value : "5.00" }, // US$5.00
+      }],
+      total : {
+        label : "Total due" ,
+        amount : { currency : "USD" , value : "60.00" }, // US$60.00
+      }
+    };
+  
+    const options = {
+      requestShipping : true
+    }
+    
     function validateResponse(response) {
     // check that the response is ok... throw if bad, for example.
     }
