@@ -37,31 +37,31 @@
   
     const options = {
       requestShipping : true
-    }
+    };
     
     function validateResponse(response) {
     // check that the response is ok... throw if bad, for example.
-    }
+    };
 
     function doPaymentRequest() {
-    const payment = new PaymentRequest(methodData, details, options);
-    payment.addEventListener("shippingaddresschange", event => {
+      const payment = new PaymentRequest(methodData, details, options);
+      payment.addEventListener("shippingaddresschange", event => {
       // Process shipping address change
-    });
-    let paymentResponse;
-    try {
-      paymentResponse = await payment.show();
-      // paymentResponse.methodName contains the selected payment method.
-      // paymentResponse.details contains a payment method specific
-      // response.
-      validateResponse(paymentResponse);
-      paymentResponse.complete("success");
-    } catch (err) {
-      console.error("Uh oh, bad payment response!", err.message);
-      paymentResponse.complete("fail");
+      });
+      let paymentResponse;
+      try {
+        paymentResponse = await payment.show();
+        // paymentResponse.methodName contains the selected payment method.
+        // paymentResponse.details contains a payment method specific
+        // response.
+        validateResponse(paymentResponse);
+        paymentResponse.complete("success");
+      } catch (err) {
+        console.error("Uh oh, bad payment response!", err.message);
+        paymentResponse.complete("fail");
+      }
     }
-  }
-  doPaymentRequest();
+    doPaymentRequest();
   </script>
   this is test for web-payment api
 </body>
