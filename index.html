@@ -43,7 +43,7 @@
     // check that the response is ok... throw if bad, for example.
     }
 
-    async function doPaymentRequest() {
+    function doPaymentRequest() {
     const payment = new PaymentRequest(methodData, details, options);
     payment.addEventListener("shippingaddresschange", event => {
       // Process shipping address change
