@@ -6,26 +6,26 @@
   <div id="root"></div>
   <!--<script src="javascript/bundle.js"></script>-->
   <script>
-    const methodData = [{
-      supportedMethods : "basic-card" ,
-      data : {
-        supportedNetworks : [ 'visa' , 'mastercard' ],
-        supportedTypes : [ 'debit' ]
-      }
+    const methodData = [
+    {
+      supportedMethods: ["visa", "mastercard"]
     }];
     
     const details = {
-      id : "super-store-order-123-12312" ,
-      displayItems : [{
-        label : "Sub-total" ,
-        amount : { currency : "USD" , value : "55.00" }, // US$55.00
-      }, {
-        label : "Sales Tax" ,
-        amount : { currency : "USD" , value : "5.00" }, // US$5.00
-      }],
-      total : {
-        label : "Total due" ,
-        amount : { currency : "USD" , value : "60.00" }, // US$60.00
+      displayItems: [
+      {
+        label: "Original donation amount",
+        amount: { currency: "USD", value : "65.00" }, // US$65.00
+      },
+      {
+        label: "Friends and family discount",
+        amount: { currency: "USD", value : "-10.00" }, // -US$10.00
+        pending: true // The price is not determined yet
+      }
+      ],
+      total:  {
+        label: "Total",
+        amount: { currency: "USD", value : "55.00" }, // US$55.00
       }
     };
   
