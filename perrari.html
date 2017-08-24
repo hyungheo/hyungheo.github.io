@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="https://storage.googleapis.com/prshim/v1/payment-shim.js"/>
+  <script src="https://storage.googleapis.com/prshim/v1/payment-shim.js"></script>
 </head>
 <body>
-  Payment TEST!!!
-  <div id="root">hello world!</div>
-  <button id="start">START!</button>
+  <button id="start"></button>
   <script>
   function onBuyClicked(event) {
     if (!window.PaymentRequest) {
