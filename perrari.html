@@ -4,7 +4,7 @@
   <script src="https://storage.googleapis.com/prshim/v1/payment-shim.js"></script>
 </head>
 <body>
-  <button id="start"></button>
+  <button id="start">START</button>
   <script>
   function onBuyClicked(event) {
     if (!window.PaymentRequest) {
@@ -36,10 +36,10 @@
     };
 
     var options = {
-      requestShipping: true,
-      requestPayerEmail: true,
-      requestPayerPhone: true,
-      requestPayerName: true
+      requestShipping: false,
+      requestPayerEmail: false,
+      requestPayerPhone: false,
+      requestPayerName: false
     };
 
     // Initialization
