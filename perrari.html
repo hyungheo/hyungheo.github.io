@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script src="https://storage.googleapis.com/prshim/v1/payment-shim.js"/>
 </head>
 <body>
   <script>
@@ -11,14 +12,14 @@
     // Payment Request API is available.
     // Stop the default anchor redirect.
     event.preventDefault();
-    
+
     var supportedInstruments = [{
       supportedMethods: [
         'visa', 'mastercard', 'amex', 'discover', 'maestro',
         'diners', 'jcb', 'unionpay', 'bitcoin'
       ]
     }];
-    
+
     var details = {
       displayItems: [{
         label: 'Original donation amount',
@@ -32,17 +33,17 @@
         amount: { currency: 'USD', value : '55.00' }
       }
     };
-    
+
     var options = {
       requestShipping: true,
       requestPayerEmail: true,
       requestPayerPhone: true,
       requestPayerName: true
     };
-    
+
     // Initialization
     var request = new PaymentRequest(supportedInstruments, details, options);
-    
+
     // When user selects a shipping address
     request.addEventListener('shippingaddresschange', e => {
       e.updateWith(((details, addr) => {
@@ -77,11 +78,11 @@
           details.displayItems.push(shippingOption);
         }
         details.shippingOptions = [shippingOption];
-        
+
         return Promise.resolve(details);
       })(details, request.shippingAddress));
     });
-    
+
     // When user selects a shipping option
     request.addEventListener('shippingoptionchange', e => {
       e.updateWith(((details) => {
@@ -89,7 +90,7 @@
         return Promise.resolve(details);
       })(details));
     });
-    
+
     // Show UI then continue with user payment info
     request.show().then(result => {
       // POST the result to the server
@@ -126,7 +127,7 @@
       console.error('Uh oh, something bad happened: ' + err.message);
     });
   }
-  
+
   // Assuming an anchor is the target for the event listener.
   document.querySelector('#start').addEventListener('click', onBuyClicked);
   </script>
