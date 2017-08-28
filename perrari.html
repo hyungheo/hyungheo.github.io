@@ -99,6 +99,7 @@
     request.show().then(result => {
       // POST the result to the server
       console.log("TEST-HEO step1!");
+      console.log("TEST0-HEO step1!: " + result.toJSON());
       return fetch('/pay', {
         method: 'POST',
         credentials: 'include',
