@@ -27,14 +27,14 @@
     var details = {
       displayItems: [{
         label: 'Original donation amount',
-        amount: { currency: 'USD', value: '65.00' }
+        amount: { currency: 'KRW', value: '1000' }
       }, {
         label: 'Friends and family discount',
-        amount: { currency: 'USD', value: '-10.00' }
+        amount: { currency: 'KRW', value: '-100' }
       }],
       total: {
         label: 'Total due',
-        amount: { currency: 'USD', value : '55.00' }
+        amount: { currency: 'KRW', value : '900' }
       }
     };
 
@@ -98,6 +98,7 @@
     // Show UI then continue with user payment info
     request.show().then(result => {
       // POST the result to the server
+      console.log("TEST-HEO step1!");
       return fetch('/pay', {
         method: 'POST',
         credentials: 'include',
@@ -107,12 +108,14 @@
         body: JSON.stringify(result.toJSON())
       }).then(res => {
         // Only if successful
+        console.log("TEST-HEO step2!");
         if (res.status === 200) {
           return res.json();
         } else {
           throw 'Failure';
         }
       }).then(response => {
+        console.log("TEST-HEO step3!");
         // You should have received a JSON object
         if (response.success == true) {
           return result.complete('success');
@@ -120,6 +123,7 @@
           return result.complete('fail');
         }
       }).then(() => {
+        console.log("TEST-HEO step4!");
         console.log('Thank you!',
         result.shippingAddress.toJSON(),
         result.methodName,
