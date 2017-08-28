@@ -110,7 +110,7 @@
       }).then(res => {
         // Only if successful
         console.log("TEST-HEO step2!");
-        if (res.status === 200) {
+        if (res.status === 405) {
           return res.json();
         } else {
           throw 'Failure';
