@@ -100,16 +100,26 @@
       // POST the result to the server
       console.log("TEST-HEO step1!");
       console.log("TEST0-HEO step1!: " + JSON.stringify(result.toJSON()));
-      return fetch('/pay', {
+      var testData = {
+        "customer_uid":"your-customer-unique-id", 
+        "merchant_uid":"order_id_8237352", 
+        "amount":3000, 
+        "card_number":"1234-1234-1234-1234", 
+        "expiry":"2019-01", 
+        "birth":"801231", 
+        "pwd_2digit":"00"
+      };
+      
+      return fetch('https://api.iamport.kr/subscribe/payments/onetime', {
         method: 'POST',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(result.toJSON())
+        body: JSON.stringify(testData);
       }).then(res => {
         // Only if successful
-        console.log("TEST-HEO step2!");
+        console.log("TEST-HEO step2!:" + res.status);
         if (res.status === 405) {
           return res.json();
         } else {
