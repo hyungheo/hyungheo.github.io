@@ -145,17 +145,39 @@
         "pwd_2digit":"00"
       };
       
-      return fetch('https://api.iamport.kr/subscribe/payments/onetime', {
+      var getTokenParam = {
+        imp_key: "",
+        imp_secret ""
+      }
+      
+      return fetch('https://api.iamport.kr/subscribe/users/getToken', {
         method: 'POST',
+        mode: 'cors',
         credentials: 'include',
         headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-          'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
-          'Access-Control-Allow-Credentials': true
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(testData)
+        body: JSON.stringify(getTokenParam)
+      }).then(res => {
+        if (res.ok) {
+          console.log("TEST-response from getToken")'
+          console.log(res);
+        }
+        var access_token = res.access_token;
+        return fetch('https://api.iamport.kr/subscribe/payments/onetime', {
+          method: 'POST',
+          credentials: 'include',
+          mode:'cors',
+          headers: {
+            'Authorization': access_token,
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+            'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
+            'Access-Control-Allow-Credentials': true
+          },
+          body: JSON.stringify(testData)
+        });
       }).then(res => {
         // Only if successful
         console.log("TEST-HEO step2!:" + res.status);
