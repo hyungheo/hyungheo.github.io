@@ -150,15 +150,15 @@
         imp_secret: "ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f"
       }
       
-      return fetch('https://api.iamport.kr/users/getToken'/*, {
-        method: 'POST',
+      return fetch('https://api.iamport.kr/users/getToken', {
+        method: 'GET',
         mode: 'no-cors',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(getTokenParam)
-      }*/).then(res => {
+      }).then(res => {
         if (res.ok) {
           console.log("TEST-response from getToken");
         } else {
