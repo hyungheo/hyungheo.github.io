@@ -160,7 +160,7 @@
         body: JSON.stringify(getTokenParam)
       }).then(res => {
         if (res.ok) {
-          console.log("TEST-response from getToken")'
+          console.log("TEST-response from getToken");
           console.log(res);
         }
         var access_token = res.access_token;
