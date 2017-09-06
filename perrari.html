@@ -8,6 +8,8 @@
   <button id="start">START</button>
   <script>
   Kakao.init('5b9c2d0c29cf56346d55b923bcd031eb');
+  var result = Kakao.Auth.getAccessToken();
+  console.log("TEST-Kakao: " + result);
   function onBuyClicked(event) {
     if (!window.PaymentRequest) {
       return;
