@@ -7,6 +7,13 @@
 <body>
   <button id="start">START</button>
   <script>
+  const configKakaoPay = {
+    POST: "/v1/payment/ready HTTP/1.1",
+    Host: "kapi.kakao.com",
+    Authorization: "KakaoAK {admin_key}",
+    Content-type: "application/x-www-form-urlencoded;charset=utf-8"
+  }
+    
   Kakao.init('5b9c2d0c29cf56346d55b923bcd031eb');
   var result = Kakao.Auth.getAccessToken();
   console.log("TEST-Kakao: " + result);
