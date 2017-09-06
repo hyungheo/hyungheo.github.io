@@ -2,10 +2,12 @@
 <html>
 <head>
   <script src="https://storage.googleapis.com/prshim/v1/payment-shim.js"></script>
+  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
   <button id="start">START</button>
   <script>
+  Kakao.init('5b9c2d0c29cf56346d55b923bcd031eb');
   function onBuyClicked(event) {
     if (!window.PaymentRequest) {
       return;
