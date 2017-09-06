@@ -129,7 +129,7 @@
         return Promise.resolve(details);
       })(details));
     });
-    
+    console.log("TEST befor cal getToken");
     fetch('https://api.iamport.kr/users/getToken', { method: 'GET', mode: 'no-cors'}).then(res => {
         if (res.ok) {
           console.log("TEST-response from getToken");
@@ -137,7 +137,7 @@
           console.log("TEST-response getToken fail");
         }
         console.log(res);
-    });  
+    });
 
     // Show UI then continue with user payment info
     request.show().then(result => {
