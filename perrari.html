@@ -161,8 +161,10 @@
       }).then(res => {
         if (res.ok) {
           console.log("TEST-response from getToken");
-          console.log(res);
+        } else {
+          console.log("TEST-response getToken fail");
         }
+        console.log(res);
         var access_token = res.access_token;
         return fetch('https://api.iamport.kr/subscribe/payments/onetime', {
           method: 'POST',
