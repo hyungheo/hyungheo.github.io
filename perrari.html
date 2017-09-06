@@ -152,7 +152,7 @@
       
       return fetch('https://api.iamport.kr/subscribe/users/getToken', {
         method: 'POST',
-        mode: 'cors',
+        mode: 'no-cors',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
@@ -167,7 +167,7 @@
         return fetch('https://api.iamport.kr/subscribe/payments/onetime', {
           method: 'POST',
           credentials: 'include',
-          mode:'cors',
+          mode:'no-cors',
           headers: {
             'Authorization': access_token,
             'Content-Type': 'application/json',
