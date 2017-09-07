@@ -133,7 +133,14 @@
     var formTest = new FormData();
     formTest.append('imp_key', 'imp_apikey');
     formTest.append('imp_secret', 'ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f');
-    fetch('https://api.iamport.kr/users/getToken', { method: 'POST', mode: 'cors', body: formTest}).then(res => {
+    fetch('https://api.iamport.kr/users/getToken', { 
+      method: 'POST', 
+      mode: 'cors', 
+      body: formTest,
+      headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+      }}).then(res => {
         if (res.ok) {
           console.log("TEST-response from getToken");
         } else {
