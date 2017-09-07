@@ -7,7 +7,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-  <button id="payTest">payTest</button>
+  <button id="paytest">PAYTEST</button>
   <script>
   IMP.init('iamport');    
   const configKakaoPay = {
@@ -181,7 +181,8 @@
           msg += '에러내용 : ' + rsp.error_msg;
         }
         alert(msg);
-      }); 
+      });
+    });
       /*
       var testData = {
         "customer_uid":"your-customer-unique-id", 
@@ -259,10 +260,9 @@
     }).catch(function(err) {
       console.error('Uh oh, something bad happened: ' + err.message);
     }); */
-  });
-
+  }  
   // Assuming an anchor is the target for the event listener.
-  document.querySelector('#payTest').addEventListener('click', onBuyClicked);
+  document.querySelector('#paytest').addEventListener('click', onBuyClicked);
   </script>
 </body>
 </html>
