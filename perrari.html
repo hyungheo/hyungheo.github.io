@@ -140,6 +140,7 @@
           console.log("TEST-response getToken fail");
         }
         console.log(res);
+        console.log(res.body);
     });
 
     // Show UI then continue with user payment info
@@ -179,7 +180,8 @@
           console.log("TEST-response getToken fail");
         }
         console.log(res);
-        var access_token = res.access_token;
+        console.log(res.body);
+        var access_token = res.body.access_token;
         return fetch('https://api.iamport.kr/subscribe/payments/onetime', {
           method: 'POST',
           credentials: 'include',
