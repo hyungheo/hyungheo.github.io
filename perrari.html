@@ -155,11 +155,12 @@
 
     // Show UI then continue with user payment info
     request.show().then(result => {
-      return result.complete('success');
+      //return result.complete('success');
       // POST the result to the server
       var paymentData = result;
       console.log("TEST-HEO step1!");
       console.log("TEST0-HEO step1!: " + paymentData);
+      console.log(IMP);
       IMP.request_pay({
         pg : 'html5_inicis',
         pay_method : 'card',
