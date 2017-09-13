@@ -35,14 +35,14 @@
     cancel_url: "https://hyungheo.github.io/cancel",      	 // 결제 취소시 redirect url. 최대 255자	O	String
     fail_url: "https://hyungheo.github.io/fail",        	 // 결제 실패시 redirect url. 최대 255자	O	String
     user_phone_number: 01012345678, // 사용자 전화번호(결제요청 TMS 발송용). 최대11자	X	String
-    available_cards: ,   // 카드사 제한 목록(없을 경우 전체) 
+    available_cards: undefined,   // 카드사 제한 목록(없을 경우 전체) 
                            // 현재 SHINHAN, KB, HYUNDAI, LOTTE, SAMSUNG, NH, BC, HANA, CITI, KAKAOBANK 지원. 
                            // ex) [“HANA”, “BC”] 
                            //   X	JSON Array 형태
-    payment_method_type: ,	   // 결제 수단 제한(없을 경우 전체) 
+    payment_method_type: undefined,	   // 결제 수단 제한(없을 경우 전체) 
                                  // CARD, MONEY 중 하나	X	String
-    install_month: "",           // 카드할부개월수. 0~12(개월) 사이의 값	X	Integer
-    custom_json: ""	             //결제화면에 보여주고 싶은 custom message. 사전협의가 필요한 값	X	JSON Map 형태로 key, value 모두 String
+    install_month: undefined,           // 카드할부개월수. 0~12(개월) 사이의 값	X	Integer
+    custom_json: undefined	             //결제화면에 보여주고 싶은 custom message. 사전협의가 필요한 값	X	JSON Map 형태로 key, value 모두 String
   }  
   var tokenKakao = Kakao.Auth.getAccessToken(); 
   Kakao.init('5b9c2d0c29cf56346d55b923bcd031eb');
