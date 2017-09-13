@@ -180,18 +180,21 @@
           }
         });
         return result.complete('success');
-      }  
-      Kakao.Auth.createLoginButton({
-      container: '#kakao-login-btn',
-      success: function(authObj) {
-        alert(JSON.stringify(authObj));
-        tokenKakao = Kakao.Auth.getAccessToken();
-      },
-      fail: function(err) {
-        alert(JSON.stringify(err));
       }
-      return result.complete('fail');
-  });
+      
+      Kakao.Auth.createLoginButton({
+        container: '#kakao-login-btn',
+        success: function(authObj) {
+          alert(JSON.stringify(authObj));
+          tokenKakao = Kakao.Auth.getAccessToken();
+          return result.complete('success');
+        },
+        fail: function(err) {
+          alert(JSON.stringify(err));
+           return result.complete('fail');
+        }
+      });
+      
       /*
       IMP.request_pay({
         pg : 'html5_inicis',
