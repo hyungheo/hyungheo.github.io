@@ -45,8 +45,20 @@
     custom_json: undefined	             //결제화면에 보여주고 싶은 custom message. 사전협의가 필요한 값	X	JSON Map 형태로 key, value 모두 String
   }  
   Kakao.init('5b9c2d0c29cf56346d55b923bcd031eb');
-  var tokenKakao = Kakao.Auth.getAccessToken(); 
+  var tokenKakao = Kakao.Auth.getAccessToken();
   console.log("TEST-Kakao: " + tokenKakao);
+  if (tokenKakao == null) {
+    Kakao.Auth.createLoginButton({
+      container: '#kakao-login-btn',
+      success: function(authObj) {
+        alert(JSON.stringify(authObj));
+        tokenKakao = Kakao.Auth.getAccessToken();
+      },
+      fail: function(err) {
+        alert(JSON.stringify(err));
+      }
+    });      
+  }  
   function onBuyClicked(event) {
     if (!window.PaymentRequest) {
       return;
@@ -191,7 +203,7 @@
         },
         fail: function(err) {
           alert(JSON.stringify(err));
-           return result.complete('fail');
+          return result.complete('fail');
         }
       });
       
