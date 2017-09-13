@@ -50,6 +50,8 @@
   if (tokenKakao == null) {
     Kakao.Auth.createLoginButton({
       container: '#kakao-login-btn',
+      size: "large",
+      persistAccessToken: true ,
       success: function(authObj) {
         alert(JSON.stringify(authObj));
         tokenKakao = Kakao.Auth.getAccessToken();
