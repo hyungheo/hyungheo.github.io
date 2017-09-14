@@ -185,9 +185,10 @@
       console.log("TEST-HEO step1!");
       console.log("TEST0-HEO step1!: " + paymentData);
       //console.log(IMP);
-      
+
       if (tokenKakao != null) {
         console.log("success getting Token " + tokenKakao);
+        try {
         return Kakao.API.request({
           url: '//kapi.kakao.com/v1/payment/ready',
           data: paymentDataKakao,
@@ -198,6 +199,10 @@
             alert(JSON.stringify(error));
           }
         });
+        } catch(e) {
+          alert(JSON.stringify(e));
+          return result.complete('fail');
+        }  
       } else {
         console.log("fail getting Token " + tokenKakao);
         Kakao.Auth.createLoginButton({
