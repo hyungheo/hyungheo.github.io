@@ -191,12 +191,13 @@
         Kakao.API.request({
           url: '/v1/payment/ready',
           data: paymentDataKakao,
+          /*
           success: function(res) {
             alert(JSON.stringify(res));
           },
           fail: function(error) {
             alert(JSON.stringify(error));
-          }
+          }*/
         }).then(success => {
           alert(JSON.stringify(success));
           return resulte.complete('success');
@@ -236,10 +237,13 @@
             },
             body: form
           }).then(success => {
+            alert(JSON.stringify(success));
             return resulte.complete('success');
           }, fail => {
+            alert(JSON.stringify(fail));
             return resulte.complete('fail');
           }).catch(e => {
+            alert(JSON.stringify(e));
             return resulte.complete('fail');
           });               
         });  
