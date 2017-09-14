@@ -233,8 +233,10 @@
               Authorization: auth,
             },
             body: form
-          }).then(result => {
-            alert(JSON.stringify(result));
+          }).then(success => {
+            alert(JSON.stringify(success));
+          }, fail => {
+            alert(JSON.stringify(fail));
           });
           } catch(e) {
             alert(JSON.stringify(e));
@@ -281,7 +283,11 @@
         }
         alert(msg);
       });*/
-    });
+    }).then(success => {
+      alert(JSON.stringify(success));
+    }, fail => {
+      alert(JSON.stringify(fail));
+    }
       /*
       var testData = {
         "customer_uid":"your-customer-unique-id", 
