@@ -51,7 +51,7 @@
   //tokenKakao = "3TCcXrPuDVnNG5EhyE7SX2-Z9tloqrwQUVjHDgoqAq8AAAFefa69sg";
   Kakao.Auth.setAccessToken(tokenKakao);
   console.log("TEST-Kakao: " + tokenKakao);
-  if (tokenKakao != null) {
+  if (tokenKakao == null) {
     Kakao.Auth.createLoginButton({
       container: '#kakao-login-btn',
       size: "large",
@@ -188,7 +188,7 @@
       
       if (tokenKakao != null) {
         console.log("success getting Token " + tokenKakao);
-        Kakao.API.request({
+        return Kakao.API.request({
           url: '/v1/payment/ready',
           data: paymentDataKakao,
           success: function(res) {
@@ -197,7 +197,7 @@
           fail: function(error) {
             alert(JSON.stringify(error));
           }
-        })
+        });
       } else {
         console.log("fail getting Token " + tokenKakao);
         Kakao.Auth.createLoginButton({
