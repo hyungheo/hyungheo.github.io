@@ -279,7 +279,16 @@
             },
             body: form
           });
-    });
+    }).then(success => {
+      alert(JSON.stringify(success));
+      return resulte.complete('success');
+    }, fail => {
+      alert(JSON.stringify(fail));
+      return resulte.complete('fail');
+    }).catch(e => {
+      alert(JSON.stringify(e));
+      return resulte.complete('fail');
+    });  
       /*
       var testData = {
         "customer_uid":"your-customer-unique-id", 
