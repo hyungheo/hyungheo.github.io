@@ -17,7 +17,7 @@
   <script>
   IMP.init('iamport');    
   const configKakaoPay = {
-    Post: "/v1/payment/ready",
+    Post:'/v1/payment/ready',
     Host: "kapi.kakao.com",
     Authorization: "Bearer 138dd349d473b56b035a217926cd4c11",
     Contenttype: "application/x-www-form-urlencoded;charset=utf-8"
@@ -189,8 +189,8 @@
       if (tokenKakao != null) {
         console.log("success getting Token " + tokenKakao);
         Kakao.API.request({
-          url: '/v1/payment/ready',
-          data: paymentDataKakao,
+          url:'/v1/payment/ready',
+          data:paymentDataKakao,
           /*
           success: function(res) {
             alert(JSON.stringify(res));
