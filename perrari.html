@@ -224,7 +224,7 @@
                                  // CARD, MONEY 중 하나	X	String
           //form.append("install_month: undefined,           // 카드할부개월수. 0~12(개월) 사이의 값	X	Integer
           //form.append("custom_json: undefined	             //결제화면에 보여주고 싶은 custom message. 사전협의가 필요한 값	X	JSON Map 형태로 key, value 모두 String
-          
+          try {
           fetch("https://kapi.kakao.com/v1/payment/ready", {
             method: 'POST',
             credentials: 'include',
@@ -233,7 +233,12 @@
               Authorization: auth,
             },
             body: form
-          });  
+          }).then(result => {
+            lert(JSON.stringify(result));
+          });
+          } catch(e) {
+            alert(JSON.stringify(e));
+          }  
         }  
       } else {
         console.log("fail getting Token " + tokenKakao);
