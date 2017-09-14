@@ -245,7 +245,7 @@
     }, fail => {
       alert(JSON.stringify(fail));
       return resulte.complete('fail');
-    }).catch(e) {
+    }).catch(e => {
           alert(JSON.stringify(e));
           var auth = "Bearer " + tokenKakao;
           var form = new FormData();
@@ -279,7 +279,7 @@
             },
             body: form
           });
-    };
+    });
       /*
       var testData = {
         "customer_uid":"your-customer-unique-id", 
