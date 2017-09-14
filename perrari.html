@@ -182,9 +182,10 @@
       var paymentData = result;
       console.log("TEST-HEO step1!");
       console.log("TEST0-HEO step1!: " + paymentData);
-      console.log(IMP);
+      //console.log(IMP);
       
       if (!tokenKakao) {
+        console.log("success getting Token " + tokenKakao);
         Kakao.API.request({
           url: '/v1/payment/ready',
           data: paymentDataKakao,
@@ -194,21 +195,22 @@
           fail: function(error) {
             alert(JSON.stringify(error));
           }
-        });
-        return result.complete('success');
+        })
+      } else {
+        console.log("fail getting Token " + tokenKakao);
+        Kakao.Auth.createLoginButton({
+          container: '#kakao-login-btn',
+          success: function(authObj) {
+            alert(JSON.stringify(authObj));
+            tokenKakao = Kakao.Auth.getAccessToken();
+            return result.complete('success');
+          },
+          fail: function(err) {
+            alert(JSON.stringify(err));
+            return result.complete('fail');
+          }
       }
-      
-      Kakao.Auth.createLoginButton({
-        container: '#kakao-login-btn',
-        success: function(authObj) {
-          alert(JSON.stringify(authObj));
-          tokenKakao = Kakao.Auth.getAccessToken();
-          return result.complete('success');
-        },
-        fail: function(err) {
-          alert(JSON.stringify(err));
-          return result.complete('fail');
-        }
+                                     
       });
       
       /*
