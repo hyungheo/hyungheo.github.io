@@ -191,13 +191,12 @@
         Kakao.API.request({
           url:'v1/payment/ready',
           data:paymentDataKakao,
-          /*
           success: function(res) {
             alert(JSON.stringify(res));
           },
           fail: function(error) {
             alert(JSON.stringify(error));
-          }*/
+          }
         }).catch(e => {
           alert("Fail to Call KakaoApi()");
           var auth = "Bearer " + tokenKakao;
