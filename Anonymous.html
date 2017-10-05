@@ -22,11 +22,13 @@
       
   const btnLogin = document.getElementById('btnLogin');   
   btnLogin.addEventListener('click', (e) => {
-    firebase.auth().signInAnonymously().catch((error) => {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ...
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(() => {
+      firebase.auth().signInAnonymously().catch((error) => {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+      });
     });
   });
                             
@@ -41,7 +43,6 @@
       const resultTxt = document.createTextNode(JSON.stringify(user));
       pTag.appendChild(resultTxt);
       resultArea.appendChild(pTag);
-      // ...
     } else {
       // User is signed out.
       // ...
