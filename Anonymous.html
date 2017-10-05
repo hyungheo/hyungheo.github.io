@@ -22,7 +22,7 @@
       
   const btnLogin = document.getElementById('btnLogin');   
   btnLogin.addEventListener('click', (e) => {
-    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(() => {
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
       firebase.auth().signInAnonymously().catch((error) => {
         // Handle Errors here.
         var errorCode = error.code;
