@@ -1,9 +1,13 @@
 
 <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
 <body>
-  <li>
-    <a id='btnLogin' href='#'>Login</a>
-  </li>
+  <div id='loginArea'>
+    <li>
+      <a id='btnLogin' href='#'>Login</a>
+    </li>
+  </div>
+  <div id='resultArea'>
+  </div>  
   <script>
   // Initialize Firebase
   var config = {
@@ -32,6 +36,11 @@
       var isAnonymous = user.isAnonymous;
       var uid = user.uid;
       console.log('login successs');
+      const resultArea = document.getElementById('resultArea');
+      const pTag = document.createElement('p');
+      const resultTxt = document.createTextNode(user);
+      pTag.appendChild(resultTxt);
+      resultArea.appendChild(pTag);
       // ...
     } else {
       // User is signed out.
