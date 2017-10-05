@@ -11,5 +11,34 @@
     messagingSenderId: "889195578532"
   };
   firebase.initializeApp(config);
+  
+  const auth = firebase.auth();
+  
+  auth.signInAnonymously().catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ...
+  });
+  
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      // User is signed in.
+      var isAnonymous = user.isAnonymous;
+      var uid = user.uid;
+      console.log('login successs');
+      // ...
+    } else {
+      // User is signed out.
+      // ...
+      console.log('logout');
+    }
+    // ...
+  });
+  
+  
 </script>
+
+
+
 
