@@ -38,7 +38,7 @@
       console.log('login successs');
       const resultArea = document.getElementById('resultArea');
       const pTag = document.createElement('p');
-      const resultTxt = document.createTextNode(user);
+      const resultTxt = document.createTextNode(JSON.stringify(user));
       pTag.appendChild(resultTxt);
       resultArea.appendChild(pTag);
       // ...
