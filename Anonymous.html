@@ -20,7 +20,7 @@
   };
   firebase.initializeApp(config);  
       
-  btnLogin.document.getElementById('btnLogin');   
+  const btnLogin = document.getElementById('btnLogin');   
   btnLogin.addEventListener('click', (e) => {
     firebase.auth().signInAnonymously().catch((error) => {
       // Handle Errors here.
