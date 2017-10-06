@@ -16,6 +16,63 @@
   <script>
   IMP.init('iamport');    
  
+  const testData = {
+    "customer_uid":"your-customer-unique-id", 
+    "merchant_uid":"order_id_8237352", 
+    "amount":1, 
+    "card_number":"1234-1234-1234-1234", 
+    "expiry":"2019-01", 
+    "birth":"801231", 
+    "pwd_2digit":"00"
+  };
+      
+  const getTokenParam = {
+    imp_key: "imp_apikey",
+    imp_secret: "ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f"
+  }
+  
+  const supportedInstruments = [{
+    supportedMethods: [
+      'visa', 'mastercard', 'amex', 'discover', 'maestro',
+      'diners', 'jcb', 'unionpay', 'bitcoin'
+    ],
+    data: {
+      merchantIdentifier: "merchant_1503926886052",
+    }
+  }];
+
+  const details = {
+    displayItems: [{
+      label: 'Original donation amount',
+      amount: { currency: 'KRW', value: '1000' }
+    }, {
+      label: 'Friends and family discount',
+      amount: { currency: 'KRW', value: '-100' }
+    }],
+    total: {
+      label: 'Total due',
+      amount: { currency: 'KRW', value : '900' }
+    }
+  };
+	  
+  const options = {
+    requestShipping: false,
+    requestPayerEmail: true,
+    requestPayerPhone: true,
+    requestPayerName: false
+  };
+	  
+  function getToken(formTest) {
+    return fetch('https://api.iamport.kr/users/getToken', { 
+      method: 'POST', 
+      mode: 'cors', 
+      body: formTest,
+      headers: {
+        'Content-Type': 'application/json',
+        Access-Control-Allow-Origin': '*'
+      }});  
+  }
+  
   function onBuyClicked(event) {
     if (!window.PaymentRequest) {
       return;
@@ -24,59 +81,23 @@
     // Stop the default anchor redirect.
     event.preventDefault();
 
-    var supportedInstruments = [{
-      supportedMethods: [
-        'visa', 'mastercard', 'amex', 'discover', 'maestro',
-        'diners', 'jcb', 'unionpay', 'bitcoin'
-      ],
-      data: {
-        merchantIdentifier: "merchant_1503926886052",
-      }
-    }];
-
-    var details = {
-      displayItems: [{
-        label: 'Original donation amount',
-        amount: { currency: 'KRW', value: '1000' }
-      }, {
-        label: 'Friends and family discount',
-        amount: { currency: 'KRW', value: '-100' }
-      }],
-      total: {
-        label: 'Total due',
-        amount: { currency: 'KRW', value : '900' }
-      }
-    };
-
-    var options = {
-      requestShipping: false,
-      requestPayerEmail: true,
-      requestPayerPhone: true,
-      requestPayerName: false
-    };
-
     // Initialization
     var request = new PaymentRequest(supportedInstruments, details, options);
     
-    console.log("TEST befor cal getToken");
+    console.log("TEST befor call getToken");
     var formTest = new FormData();
     formTest.append('imp_key', 'imp_apikey');
     formTest.append('imp_secret', 'ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f');
-    fetch('https://api.iamport.kr/users/getToken', { 
-      method: 'POST', 
-      mode: 'cors', 
-      body: formTest,
-      headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-      }}).then(res => {
-        if (res.ok) {
-          console.log("TEST-response from getToken");
-        } else {
-          console.log("TEST-response getToken fail");
-        }
-        console.log(res);
-        console.log(res.body);
+    getToken(formTest).catch((e) => {
+      console.log('Error getToken ' + e);
+    }).then(res => {
+      if (res.ok) {
+        console.log("TEST-response from getToken");
+      } else {
+        console.log("TEST-response getToken fail");
+      }
+      console.log(res);
+      console.log(res.body);
     });
 
     // Show UI then continue with user payment info
@@ -86,26 +107,12 @@
       var paymentData = result;
       console.log("TEST0-HEO step1!: " + paymentData);
       //console.log(IMP);
-      var testData = {
-        "customer_uid":"your-customer-unique-id", 
-        "merchant_uid":"order_id_8237352", 
-        "amount":1, 
-        "card_number":"1234-1234-1234-1234", 
-        "expiry":"2019-01", 
-        "birth":"801231", 
-        "pwd_2digit":"00"
-      };
-      
-      var getTokenParam = {
-        imp_key: "imp_apikey",
-        imp_secret: "ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f"
-      }
-      
+	    
       var form = new FormData();
       form.append('imp_key', 'imp_apikey');
       form.append('imp_secret', 'ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f');
       
-      return fetch('https://api.iamport.kr/users/getToken', {
+      fetch('https://api.iamport.kr/users/getToken', {
         method: 'POST',
         mode: 'no-cors',
         credentials: 'include',
@@ -119,7 +126,7 @@
         console.log(res);
         console.log(res.body);
         var access_token = res.body.access_token;
-        return fetch('https://api.iamport.kr/subscribe/payments/onetime', {
+        fetch('https://api.iamport.kr/subscribe/payments/onetime', {
           method: 'POST',
           credentials: 'include',
           mode:'no-cors',
