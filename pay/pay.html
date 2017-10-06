@@ -74,12 +74,12 @@
   }
 	
   function oneTimePay(testData) {
+		console.log('oneTimePay()');
 	  fetch('https://hulpan.com/pay/onetime', {
       method: 'POST',
       credentials: 'include',
       mode:'no-cors',
       headers: {
-        'Authorization': access_token,
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
@@ -97,6 +97,11 @@
     // Payment Request API is available.
     // Stop the default anchor redirect.
     event.preventDefault();
+		oneTimePay(testData).then(res => {
+      // Only if successful
+      console.log("TEST-HEO step2!:" + res.status);
+		  result.complete('success');
+    });
 
     // Initialization
     var request = new PaymentRequest(supportedInstruments, details, options);
@@ -107,11 +112,6 @@
       var paymentData = result;
       console.log("TEST0-HEO step1!: " + paymentData);
       //console.log(IMP);       
-      oneTimePay(testData).then(res => {
-        // Only if successful
-        console.log("TEST-HEO step2!:" + res.status);
-				result.complete('success');
-      });
     }).catch((err) => {
       console.error('Uh oh, something bad happened: ' + err.message);
     });
