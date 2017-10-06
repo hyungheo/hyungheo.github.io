@@ -66,6 +66,8 @@
       mode: 'cors', 
       body: formTest,
       headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
         'Content-Type': 'application/x-www-form-urlencoded',
         'Access-Control-Allow-Origin': '*',
       }
@@ -78,7 +80,10 @@
     console.log(data);
     return fetch('https://hulpan.com/pay/onetime', {
       method: 'POST',
+      mode: 'cors',
       headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
         'Content-Type': 'application/json'
       },
       body: data
