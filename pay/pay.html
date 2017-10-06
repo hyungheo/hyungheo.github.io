@@ -73,8 +73,8 @@
       }});  
   }
 	
-  function oneTimePay(access_token, testData) {
-	  fetch('https://api.iamport.kr/subscribe/payments/onetime', {
+  function oneTimePay(testData) {
+	  fetch('https://hulpan.com/pay/onetime', {
       method: 'POST',
       credentials: 'include',
       mode:'no-cors',
@@ -100,27 +100,6 @@
 
     // Initialization
     var request = new PaymentRequest(supportedInstruments, details, options);
-		var access_token = '';
-    
-    console.log("TEST befor call getToken");
-    var formTest = new FormData();
-    formTest.append('imp_key', 'imp_apikey');
-    formTest.append('imp_secret', 'ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f');
-    
-    getToken(formTest).catch((e) => {
-      console.log('Error getToken ' + e);
-			return Promise.reject(e);
-    }).then((success) => {
-	    if (!success) { 
-        console.log(success);
-        access_token = success.body.access_token;
-			} else {
-				console.log('getToken fail!');
-			}
-    }, (fail) => {
-		  console.log(fail);
-	  });
-
     // Show UI then continue with user payment info
     request.show().then(result => {
       // return result.complete('success');
@@ -128,7 +107,7 @@
       var paymentData = result;
       console.log("TEST0-HEO step1!: " + paymentData);
       //console.log(IMP);       
-      oneTimePay('6d5e5dade4c4cff9dbb6a2bbe7e096ca10dd0147').then(res => {
+      oneTimePay(testData).then(res => {
         // Only if successful
         console.log("TEST-HEO step2!:" + res.status);
 				result.complete('success');
