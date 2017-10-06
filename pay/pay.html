@@ -116,6 +116,7 @@
       console.error('Uh oh, something bad happened: ' + err.message);
     });
 	
+		/* 
 	  // When user selects a shipping address
     request.addEventListener('shippingaddresschange', e => {
       e.updateWith(((details, addr) => {
@@ -154,7 +155,6 @@
         return Promise.resolve(details);
       })(details, request.shippingAddress));
     });
-
     // When user selects a shipping option
     request.addEventListener('shippingoptionchange', e => {
       e.updateWith(((details) => {
@@ -162,6 +162,7 @@
         return Promise.resolve(details);
       })(details));
     });
+		*/
   }
   // Assuming an anchor is the target for the event listener.
   document.querySelector('#paytest').addEventListener('click', onBuyClicked);
