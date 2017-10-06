@@ -83,21 +83,19 @@
 
     // Initialization
     var request = new PaymentRequest(supportedInstruments, details, options);
+		var access_token = '';
     
     console.log("TEST befor call getToken");
     var formTest = new FormData();
     formTest.append('imp_key', 'imp_apikey');
     formTest.append('imp_secret', 'ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f');
+    
     getToken(formTest).catch((e) => {
       console.log('Error getToken ' + e);
     }).then(res => {
-      if (res.ok) {
-        console.log("TEST-response from getToken");
-      } else {
-        console.log("TEST-response getToken fail");
-      }
       console.log(res);
       console.log(res.body);
+      access_token = res.body.access_token;
     });
 
     // Show UI then continue with user payment info
@@ -106,27 +104,8 @@
       // POST the result to the server
       var paymentData = result;
       console.log("TEST0-HEO step1!: " + paymentData);
-      //console.log(IMP);
-	    
-      var form = new FormData();
-      form.append('imp_key', 'imp_apikey');
-      form.append('imp_secret', 'ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f');
-      
-      fetch('https://api.iamport.kr/users/getToken', {
-        method: 'POST',
-        mode: 'no-cors',
-        credentials: 'include',
-        body: form
-      }).then(res => {
-        if (res.ok) {
-          console.log("TEST-response from getToken");
-        } else {
-          console.log("TEST-response getToken fail");
-        }
-        console.log(res);
-        console.log(res.body);
-        var access_token = res.body.access_token;
-        fetch('https://api.iamport.kr/subscribe/payments/onetime', {
+      //console.log(IMP);       
+      fetch('https://api.iamport.kr/subscribe/payments/onetime', {
           method: 'POST',
           credentials: 'include',
           mode:'no-cors',
