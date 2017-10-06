@@ -4,9 +4,9 @@
   const TARGET_URL = `//${HOST}:${PORT}`; 
   function sendDeepLink() { 
     const intentURI = [ 
-      `intent:${TARGET_URL}/perrari.html#Intent`, 
+      `intent:${TARGET_URL}/pay/pay.html#Intent`, 
       'scheme=https', 
-      `S.browser_fallback_url=${TARGET_URL}/perrari.html`, 
+      `S.browser_fallback_url=${TARGET_URL}/pay/pay.html`, 
       'end', 
     ].join(';'); 
     window.location.href = intentURI; 
@@ -26,20 +26,20 @@
     return /Chrome/.test(navigator.userAgent); 
   } 
   
-  function goToWeddingSite() { 
-    window.location.href = `${TARGET_URL}/perrari.html`;
+  function goToPayment() { 
+    window.location.href = `${TARGET_URL}/pay/pay.html`;
   } 
   
   const deeplink = { 
     createBrowser() { 
-      if (isAndroidDevice()) { 
+      if (isAndroidDevice()) {
         if (isLatestWebView() || (!isSamsungBrowser() && !isChrome())) { 
           sendDeepLink(); 
         } else { 
-          goToWeddingSite(); 
+          goToPayment(); 
         } 
       } else { 
-        goToWeddingSite(); 
+        goToPayment(); 
       } 
     }, 
   }; 
