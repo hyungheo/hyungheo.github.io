@@ -72,6 +72,24 @@
         'Access-Control-Allow-Origin': '*',
       }});  
   }
+	
+	function oneTimePay(access_token) {
+	  fetch('https://api.iamport.kr/subscribe/payments/onetime', {
+        method: 'POST',
+        credentials: 'include',
+        mode:'no-cors',
+        headers: {
+          'Authorization': access_token,
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+          'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
+          'Access-Control-Allow-Credentials': true
+        },
+        body: JSON.stringify(testData)
+      });
+    })
+	}
   
   function onBuyClicked(event) {
     if (!window.PaymentRequest) {
@@ -105,45 +123,10 @@
       var paymentData = result;
       console.log("TEST0-HEO step1!: " + paymentData);
       //console.log(IMP);       
-      fetch('https://api.iamport.kr/subscribe/payments/onetime', {
-          method: 'POST',
-          credentials: 'include',
-          mode:'no-cors',
-          headers: {
-            'Authorization': access_token,
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-            'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
-            'Access-Control-Allow-Credentials': true
-          },
-          body: JSON.stringify(testData)
-        });
-      }).then(res => {
+      oneTimePay().then(res => {
         // Only if successful
         console.log("TEST-HEO step2!:" + res.status);
-        if (res.status === 405) {
-          return res.json();
-        } else {
-          throw 'Failure';
-        }
-      }).then(response => {
-        console.log("TEST-HEO step3!");
-        // You should have received a JSON object
-        //if (response.success == true) {
-        if (true) {
-          return result.complete('success');
-        } else {
-          return result.complete('fail');
-        }
-      }).then(() => {
-        console.log("TEST-HEO step4!");
-        console.log('Thank you!',
-        result.shippingAddress.toJSON(),
-        result.methodName,
-        result.details.toJSON());
-      }).catch(() => {
-        return result.complete('fail');
+				result.complete('success');
       });
     }).catch((err) => {
       console.error('Uh oh, something bad happened: ' + err.message);
