@@ -109,10 +109,14 @@
     
     getToken(formTest).catch((e) => {
       console.log('Error getToken ' + e);
+			return Promise.reject();
     }).then(res => {
-      console.log(res);
-      console.log(res.body);
-      access_token = res.body.access_token;
+	    if (!res) { 
+        console.log(res);
+        access_token = res.body.access_token;
+			} else {
+				console.log('getToken fail!');
+			}	
     });
 
     // Show UI then continue with user payment info
@@ -131,7 +135,7 @@
       console.error('Uh oh, something bad happened: ' + err.message);
     });
 	
-	// When user selects a shipping address
+	  // When user selects a shipping address
     request.addEventListener('shippingaddresschange', e => {
       e.updateWith(((details, addr) => {
         var shippingOption = {
