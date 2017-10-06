@@ -43,5 +43,5 @@
       } 
     }, 
   }; 
-  window.deeplink = deeplink; 
+  window.deeplink = deeplink;
 }(window));
