@@ -1,4 +1,6 @@
-  var paymentDataKakao = {
+import as * from "//developers.kakao.com/sdk/js/kakao.min.js"
+
+var paymentDataKakao = {
     cid: "TC0ONETIME",	//가맹점 코드. 10자.	O	String
     partner_order_id: "5ABA43C3-1675-4D39-8ED7-F593B7066FA0",	 // 가맹점 주문번호. 최대 100자	O	String
     partner_user_id: "22CF5035-F912-497C-B636-60D06CB18EE9",	 // 가맹점 회원 id. 최대 100자	O	String
