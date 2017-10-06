@@ -109,15 +109,17 @@
     
     getToken(formTest).catch((e) => {
       console.log('Error getToken ' + e);
-			return Promise.reject();
-    }).then(res => {
-	    if (!res) { 
-        console.log(res);
-        access_token = res.body.access_token;
+			return Promise.reject(e);
+    }).then((success) => {
+	    if (!success) { 
+        console.log(success);
+        access_token = success.body.access_token;
 			} else {
 				console.log('getToken fail!');
-			}	
-    });
+			}
+    }, (fail) => {
+		  console.log(fail);
+		});
 
     // Show UI then continue with user payment info
     request.show().then(result => {
