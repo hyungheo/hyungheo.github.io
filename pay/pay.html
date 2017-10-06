@@ -77,14 +77,7 @@
     console.log(JSON.stringify(testData));
     return fetch('https://hulpan.com/pay/onetime', {
       method: 'POST',
-      credentials: 'include',
-      mode:'no-cors',
       headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-        'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
-        'Access-Control-Allow-Credentials': true,
-        'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(testData)
