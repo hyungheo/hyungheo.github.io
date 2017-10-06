@@ -86,7 +86,6 @@
       var paymentData = result;
       console.log("TEST0-HEO step1!: " + paymentData);
       //console.log(IMP);
-    });
       var testData = {
         "customer_uid":"your-customer-unique-id", 
         "merchant_uid":"order_id_8237352", 
@@ -160,9 +159,9 @@
       }).catch(() => {
         return result.complete('fail');
       });
-    }).catch(function(err) {
+    }).catch((err) => {
       console.error('Uh oh, something bad happened: ' + err.message);
-    }); */
+    });
 	
 	// When user selects a shipping address
     request.addEventListener('shippingaddresschange', e => {
