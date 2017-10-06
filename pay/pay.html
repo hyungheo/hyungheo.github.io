@@ -73,7 +73,7 @@
       }});  
   }
 	
-  function oneTimePay(access_token) {
+  function oneTimePay(access_token, testData) {
 	  fetch('https://api.iamport.kr/subscribe/payments/onetime', {
       method: 'POST',
       credentials: 'include',
@@ -128,7 +128,7 @@
       var paymentData = result;
       console.log("TEST0-HEO step1!: " + paymentData);
       //console.log(IMP);       
-      oneTimePay().then(res => {
+      oneTimePay('6d5e5dade4c4cff9dbb6a2bbe7e096ca10dd0147').then(res => {
         // Only if successful
         console.log("TEST-HEO step2!:" + res.status);
 				result.complete('success');
