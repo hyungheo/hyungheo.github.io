@@ -80,10 +80,12 @@
     console.log(data);
     return fetch('https://hulpan.com/pay/onetime', {
       method: 'POST',
+      credentials: 'include',
       mode: 'cors',
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+	'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
         'Content-Type': 'application/json'
       },
       body: data
