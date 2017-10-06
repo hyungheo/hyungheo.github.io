@@ -98,10 +98,13 @@
     // Payment Request API is available.
     // Stop the default anchor redirect.
     event.preventDefault();
-		oneTimePay(testData).then(res => {
+		oneTimePay(testData).then((res) => {
       // Only if successful
-      console.log("TEST-HEO step2!:" + res.status);
-		  result.complete('success');
+      if (res) {
+        console.log("TEST-HEO step2!:" + res.status);
+      } else {
+        console.log("Fail-oneTimePay");
+      }  
     });
 
     // Initialization
