@@ -17,11 +17,13 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  console.log('[hulpan] fetch');
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
         // Cache hit - return response
         if (response) {
+          console.log('[hulpan] fetch: Cache hit!');
           return response;
         }
         return fetch(event.request);
