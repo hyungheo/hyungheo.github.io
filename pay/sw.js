@@ -23,7 +23,8 @@ self.addEventListener('install', (event) => {
         sizes: "48x48",
         type: "image/webp"
       }]
-    });
+    }
+  });
 });
 
 self.addEventListener('fetch', (event) => {
