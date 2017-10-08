@@ -24,7 +24,6 @@ self.addEventListener('install', (event) => {
         type: "image/webp"
       }]
     });
-  );
 });
 
 self.addEventListener('fetch', (event) => {
