@@ -58,6 +58,28 @@ self.addEventListener('fetch', (event) => {
   //event.respondWith();  
 });
 
+self.addEventListener('paymentrequest', (e) => {
+  showNoti("TEST PAYMENT_REQUEST");
+  e.respondWith(new Promise(function(resolve, reject) {
+    self.addEventListener('message', listener = function(e) {
+      self.removeEventListener('message', listener);
+      if (e.data.hasOwnProperty('name')) {
+        reject(e.data);
+      } else {
+        resolve(e.data);
+      }
+    });
+
+    e.openWindow("https://hyungheo.github.io/pay")
+    .then((windowClient) => {
+      windowClient.postMessage(e.data);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+  }));
+});
+
 /*
     caches.match(event.request).then((response) => {
       if (response) {
