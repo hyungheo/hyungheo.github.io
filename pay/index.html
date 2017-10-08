@@ -9,7 +9,7 @@
   </div>
   <script>
     //deeplink.createBrowser();
-    Notification.requestPermission
+    Notification.requestPermission();
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then(registrations) {
         console.(" registrations.length");
