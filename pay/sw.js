@@ -45,6 +45,8 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('fetch', (event) => {
   console.log('[ServiceWorker] fetch event');
+  var pm = self.registration.paymentManager;
+  console.log(JSON.stringify(pm));
   //event.respondWith();  
 });
 
