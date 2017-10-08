@@ -72,6 +72,10 @@
         navigator.serviceWorker.register('sw.js', {scope: './pay'}).then((registration) => {
           registration.update().then((success) => {
             console.log("update success!" + success);
+            console.log(registration);
+            console.log(registration.paymentManager);
+            console.log(registration.paymentManager.paymentInstruments);
+            console.log(registration.paymentManager.paymentInstruments.set);
             registration.paymentManager.paymentInstruments.set(instrumentParam);
           }).catch((error) => {
             console.log("update failed! " + error);
