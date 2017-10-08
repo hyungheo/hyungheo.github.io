@@ -38,15 +38,12 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     self.registration.paymentManager.paymentInstruments.set()
   );
-});  
+});
 
 self.addEventListener('fetch', (event) => {
   console.log('[ServiceWorker] fetch event');
   event.respondWith(
     caches.match(event.request).then((response) => {
-      self.registration.showNotification('ServiceWorker Fetch', {
-        actions: [{action: 'get', title: '[HUL] ServiceWorker Fetch'}]
-      });
       if (response) {
         return response;
       }
@@ -54,3 +51,13 @@ self.addEventListener('fetch', (event) => {
     });
   );  
 });
+
+
+function showNoti(msg) {
+  self.registration.showNotification('ServiceWorker Fetch', {
+    actions: [{
+        action: 'get', 
+        title: '[HUL]' + msg
+    }]
+  });
+}
