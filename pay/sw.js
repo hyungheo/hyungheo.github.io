@@ -1,8 +1,12 @@
-var CACHE_NAME = 'hulpan-pay';
-var urlsToCache = [
+const CACHE_NAME = 'hulpan-pay';
+const urlsToCache = [
   '/pay/hulpan.html',
   '/pay/hulpan.js'
 ];
+
+var permission = Notification.permission;
+
+console.log("permission " + permission);
 
 self.addEventListener('install', (event) => {
   self.registration.showNotification('ServiceWorker Installed', {
@@ -12,7 +16,6 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        self.alert('[hulpan] Opened cache');
         return cache.addAll(urlsToCache);
       })
   );
@@ -27,7 +30,6 @@ self.addEventListener('fetch', (event) => {
       .then((response) => {
         // Cache hit - return response
         if (response) {
-          self.alert('[hulpan] fetch: Cache hit!');
           return response;
         }
         return fetch(event.request);
