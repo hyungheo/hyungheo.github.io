@@ -8,7 +8,13 @@
     this is test for web-payment api
   </div>
   <script>
-    deeplink.createBrowser();  
+    //deeplink.createBrowser();
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js');
+      alert('serviceWorker.registered success!');
+    } else {
+      alert('serviceWorker.registered failed!'); 
+    }  
   </script>
 </body>
 </html>
