@@ -5,25 +5,25 @@ var urlsToCache = [
 ];
 
 self.addEventListener('install', (event) => {
-  console.log('[hulpan] ServiceWorker Install');
+  alert('[hulpan] ServiceWorker Install');
   // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('[hulpan] Opened cache');
+        alert('[hulpan] Opened cache');
         return cache.addAll(urlsToCache);
       })
   );
 });
 
 self.addEventListener('fetch', (event) => {
-  console.log('[hulpan] fetch');
+  alert('[hulpan] fetch');
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
         // Cache hit - return response
         if (response) {
-          console.log('[hulpan] fetch: Cache hit!');
+          alert('[hulpan] fetch: Cache hit!');
           return response;
         }
         return fetch(event.request);
