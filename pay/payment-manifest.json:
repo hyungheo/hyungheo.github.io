@@ -1,7 +1,4 @@
 {
   "default_applications": ["hyungheo.github.io/pay/webappmanifest.json"],
-  "supported_origins": [
-    "https://hulpan.com",
-    "https://hyungheo.github.io/app/"
-  ]
+  "supported_origins": "*"
 }
