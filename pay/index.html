@@ -9,34 +9,42 @@
   </div>
   <script>
     //deeplink.createBrowser();
-    navigator.Notification.requestPermission().then((permission) => {
+    Notification.requestPermission().then((permission) => {
       console.log(permission);
     }).catch((error) => {
       console.log(error);
     });
     
+    var unregiHandler = function (resolve) {
+      console.log("unregister success!");
+      return Promise.resolve("success");
+    }
+    var unregiErrHandler = function (error) {
+      console.log("unregister failed! " + error);
+      return Promise.resolve("success");
+    }
+    
+    var unregiLists = [];
+    
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then((registrations) => {
         for(var i in registrations) {
           console.log(JSON.stringify(registrations[i])  + "in registrations");
-          registrations[i].unregister().then((success) => {
-            console.log("unregister success!");
-          }).catch((error) => {
-            console.log("unregister failed!");
-          });
+          unregiLists.push(registrations[i].unregister().then(unregiHandler).catch(unregiErrHandler));
         }
-      })
-      navigator.serviceWorker.register('sw.js', {scope: './pay'}).then((registration) => {
-        registration.update().then((success) => {
-          alert('service_registration update!');
-          console.log("update success!" + success);
-        }).catch((error) => {
-          console.log("update failed! " + error);
+      });
+      Promise.all(unregiLists).then(() => {
+        navigator.serviceWorker.register('sw.js', {scope: './pay'}).then((registration) => {
+          registration.update().then((success) => {
+            alert('service_registration update!');
+            console.log("update success!" + success);
+          }).catch((error) => {
+            console.log("update failed! " + error);
+          });
         });
       });
-      alert('serviceWorker.registered success!');
     } else {
-      alert('serviceWorker.registered failed!'); 
+      alert('serviceWorker is not supperted!'); 
     }  
   </script>
 </body>
