@@ -9,6 +9,28 @@
   </div>
   <script>
     //deeplink.createBrowser();
+    
+    const swIcons = [{
+      src: "icon/lowres.webp",
+      sizes: "48x48",
+      type: "image/webp"
+    }];
+    const swEnabledMethods = [
+      "https://hulpan.com/"
+    ];
+    const swPayName = "HULPAN_PAY";
+    const instrumentKey = "c8126178-3bba-4d09-8f00-0771bcfd3b11";
+    const instrumentData = {
+      name: swPayName,
+      enabledMethods: swEnabledMethods,
+      icons: swIcons
+    };
+    
+    instrumentParam = {
+      instrumentKey,
+      instrumentData 
+    };
+    
     Notification.requestPermission().then((permission) => {
       console.log(permission);
     }).catch((error) => {
@@ -37,10 +59,8 @@
         navigator.serviceWorker.register('sw.js', {scope: './pay'}).then((registration) => {
           registration.update().then((success) => {
             console.log("update success!" + success);
-            const pm = registration.paymentManager;
-            const pi = pm.paymentInstruments;
-            console.log(pm);
-            console.log(pi);
+            const pi = registration.paymentManager.paymentInstruments;
+            pi.set(instrumentParam);
           }).catch((error) => {
             console.log("update failed! " + error);
           });
