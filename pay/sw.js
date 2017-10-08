@@ -18,7 +18,7 @@ const swPayName = "HULPAN_PAY";
 
 const instrumentData = {
   name: swPayName,
-  enabledMethods: swEnabledMethods_sw,
+  enabledMethods: swEnabledMethods,
   icons: wIcons
 };
 
