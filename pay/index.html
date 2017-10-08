@@ -10,14 +10,14 @@
   <script>
     //deeplink.createBrowser();
     
-  if (!window.PaymentManager) {
-    alert('PaymentManager was not supported!');
-  }
+    if (!window.PaymentManager) {
+      alert('PaymentManager was not supported!');
+    }
 
-  const result = await PaymentManager.requestPermission();
-  if (result !== "granted") {
-    return;
-  }
+    const result = PaymentManager.requestPermission();
+    if (result !== "granted") {
+      alert("PaymentManager " + result);
+    }
     
     const swIcons = [{
       src: "icon/lowres.webp",
