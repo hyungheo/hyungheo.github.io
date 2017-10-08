@@ -20,8 +20,9 @@ self.addEventListener('fetch', (event) => {
   self.registration.showNotification('ServiceWorker Fetch', {
     actions: [{action: 'get', title: '[HUL] ServiceWorker Fetch'}]
   });
-  var result = self.registration.paymentManager.requestPermission();
-    self.registration.showNotification(result, {
+  var result = self.registration.paymentManager;
+  console.log("[ServiceWorker] " + JSON.stringify(result));
+  self.registration.showNotification(result, {
     actions: [{action: 'get', title: '[HUL]' + result}]
   });
   event.respondWith(
