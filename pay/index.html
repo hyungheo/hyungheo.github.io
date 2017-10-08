@@ -10,6 +10,7 @@
   <script>
     //deeplink.createBrowser();
     if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.unregister();
       navigator.serviceWorker.register('sw.js', {scope: './pay'}).then((registration) => {
         alert('service_registration update!');
         registration.update();
