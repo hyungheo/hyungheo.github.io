@@ -4,6 +4,29 @@ const urlsToCache = [
   '/pay/kakao.js'
 ];
 
+const swIcons = [{
+  src: "icon/lowres.webp",
+  sizes: "48x48",
+  type: "image/webp"
+}];
+
+const swEnabledMethods = [
+  "https://hulpan.com/"
+];
+
+const swPayName = "HULPAN_PAY";
+
+const instrumentData = {
+  name: swPayName,
+  enabledMethods: swEnabledMethods_sw,
+  icons: wIcons
+};
+
+instrumentParam = { 
+  instrumentKey,
+  instrumentData 
+};
+
 self.addEventListener('install', (event) => {
   console.log('[ServiceWorker] install event');
   // Perform install steps
@@ -12,19 +35,8 @@ self.addEventListener('install', (event) => {
         return cache.addAll(urlsToCache);
     })
   );
-  event.waitUntil(self.registration.paymentManager.paymentInstruments.set(
-    {
-      instrumentKey,
-      {
-        name: "HULPAN_PAY",
-        enabledMethods: ["https://hulpan.com/"],
-        icons: [{
-          src: "icon/lowres.webp",
-          sizes: "48x48",
-          type: "image/webp"
-        }]
-      }
-    })
+  event.waitUntil(
+    self.registration.paymentManager.paymentInstruments.set()
   );
 });  
 
@@ -40,6 +52,5 @@ self.addEventListener('fetch', (event) => {
       }
       return fetch(event.request);
     }
-  )
-);
+  ); 
 });
