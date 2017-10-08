@@ -76,8 +76,8 @@
             console.log(registration);
             console.log(registration.paymentManager);
             console.log(registration.paymentManager.paymentInstruments);
-            console.log(registration.paymentManager.paymentInstruments.set);
-            registration.paymentManager.paymentInstruments.set(instrumentParam);
+            console.log(registration.paymentManager.paymentInstruments());
+            registration.paymentManager.paymentInstruments().set(instrumentParam);
           }).catch((error) => {
             console.log("update failed! " + error);
           });
