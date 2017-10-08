@@ -13,6 +13,18 @@ self.addEventListener('install', (event) => {
         return cache.addAll(urlsToCache);
       })
   );
+  event.waitUntil(self.registration.paymentManager.paymentInstruments.set({
+    instrumentKey,
+    {
+      name: "HULPAN_PAY",
+      enabledMethods: ["https://hulpan.com/"],
+      icons: [{
+        src: "icon/lowres.webp",
+        sizes: "48x48",
+        type: "image/webp"
+      }]
+    });
+  );
 });
 
 self.addEventListener('fetch', (event) => {
