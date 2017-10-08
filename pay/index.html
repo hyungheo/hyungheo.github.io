@@ -70,7 +70,7 @@
         }
       });
       Promise.all(unregiLists).then(() => {
-        navigator.serviceWorker.register('sw.js', {scope: '/'}).then((registration) => {
+        navigator.serviceWorker.register('sw.js', {scope: '.'}).then((registration) => {
           registration.update().then((success) => {
             console.log("update success!" + success);
             console.log("[regi] " + registration);
