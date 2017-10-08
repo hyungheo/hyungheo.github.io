@@ -4,7 +4,7 @@ const urlsToCache = [
   '/pay/hulpan.js'
 ];
 
-var permission = Notification.permission;
+Notification.requestPermission();
 
 console.log("permission " + permission);
 
