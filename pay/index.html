@@ -36,8 +36,11 @@
       Promise.all(unregiLists).then(() => {
         navigator.serviceWorker.register('sw.js', {scope: './pay'}).then((registration) => {
           registration.update().then((success) => {
-            alert('service_registration update!');
             console.log("update success!" + success);
+            const pm = registration.paymentManager;
+            const pi = pm.paymentInstruments;
+            console.log(pm);
+            console.log(pi);
           }).catch((error) => {
             console.log("update failed! " + error);
           });
