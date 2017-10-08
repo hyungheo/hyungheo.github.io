@@ -49,9 +49,6 @@ self.addEventListener('install', (event) => {
         return cache.addAll(urlsToCache);
     })
   );
-  event.waitUntil(
-    pm.paymentInstruments.set(instrumentParam)
-  );
 });
 
 self.addEventListener('fetch', (event) => {
