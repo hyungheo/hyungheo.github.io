@@ -10,7 +10,7 @@ console.log("permission " + permission);
 
 self.addEventListener('install', (event) => {
   self.registration.showNotification('ServiceWorker Installed', {
-    actions: [{action: "get", title: "[HUL] ServiceWorker Installed"}]
+    actions: [{action: 'get', title: '[HUL] ServiceWorker Installed'}]
   });
   // Perform install steps
   event.waitUntil(
@@ -23,7 +23,7 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('fetch', (event) => {
   self.registration.showNotification('ServiceWorker Fetch', {
-    actions: [{action: "get", title: "[HUL] ServiceWorker Fetch"}]
+    actions: [{action: 'get', title: '[HUL] ServiceWorker Fetch'}]
   });
   event.respondWith(
     caches.match(event.request)
