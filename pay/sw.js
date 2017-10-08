@@ -32,7 +32,7 @@ instrumentParam = {
 
 
 function showNoti(msg) {
-  self.registration.showNotification('ServiceWorker Fetch', {
+  self.registration.showNotification('ServiceWorker ' + msg, {
     actions: [{
         action: 'get', 
         title: '[HUL]' + msg
