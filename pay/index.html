@@ -10,6 +10,15 @@
   <script>
     //deeplink.createBrowser();
     
+  if (!window.PaymentManager) {
+    alert('PaymentManager was not supported!');
+  }
+
+  const result = await PaymentManager.requestPermission();
+  if (result !== "granted") {
+    return;
+  }
+    
     const swIcons = [{
       src: "icon/lowres.webp",
       sizes: "48x48",
@@ -59,7 +68,7 @@
         navigator.serviceWorker.register('sw.js', {scope: './pay'}).then((registration) => {
           registration.update().then((success) => {
             console.log("update success!" + success);
-            await registration.paymentManager.paymentInstruments.set(instrumentParam);
+            // registration.paymentManager.paymentInstruments.set(instrumentParam);
           }).catch((error) => {
             console.log("update failed! " + error);
           });
