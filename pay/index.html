@@ -11,8 +11,10 @@
     //deeplink.createBrowser();
     
     if (!window.PaymentManager) {
+      console.log('PaymentManager was not supported!');
       alert('PaymentManager was not supported!');
     } else {
+      console.log(JSON.stringify(window.PaymentManager));
       alert(JSON.stringify(window.PaymentManager));
     }
 
