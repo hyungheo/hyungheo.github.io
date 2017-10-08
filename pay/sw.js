@@ -28,6 +28,16 @@ instrumentParam = {
   instrumentData 
 };
 
+
+function showNoti(msg) {
+  self.registration.showNotification('ServiceWorker Fetch', {
+    actions: [{
+        action: 'get', 
+        title: '[HUL]' + msg
+    }]
+  });
+}
+
 self.addEventListener('install', (event) => {
   var pm = self.registration.paymentManager;
   console.log('[ServiceWorker] install event');
@@ -59,12 +69,3 @@ self.addEventListener('fetch', (event) => {
       return fetch(event.request);    
     });
 */
-
-function showNoti(msg) {
-  self.registration.showNotification('ServiceWorker Fetch', {
-    actions: [{
-        action: 'get', 
-        title: '[HUL]' + msg
-    }]
-  });
-}
