@@ -70,13 +70,13 @@
         }
       });
       Promise.all(unregiLists).then(() => {
-        navigator.serviceWorker.register('sw.js', {scope: './pay'}).then((registration) => {
+        navigator.serviceWorker.register('sw.js', {scope: '/'}).then((registration) => {
           registration.update().then((success) => {
             console.log("update success!" + success);
             console.log("[regi] " + registration);
             console.log("[payM] " + registration.paymentManager);
             console.log("[payI] " + registration.paymentManager.instruments);
-            registration.paymentManager.instruments.set(instrumentParam);
+            registration.paymentManager.instruments.set('https://,instrumentParam);
           }).catch((error) => {
             console.log("update failed! " + error);
           });
