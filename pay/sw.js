@@ -30,7 +30,6 @@ instrumentParam = {
   instrumentData 
 };
 
-
 function showNoti(msg) {
   self.registration.showNotification('ServiceWorker ' + msg, {
     actions: [{
