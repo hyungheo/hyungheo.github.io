@@ -73,9 +73,9 @@
         navigator.serviceWorker.register('sw.js', {scope: '.'}).then((registration) => {
           registration.update().then((success) => {
             console.log("update success!" + success);
-            console.log("[regi] " + registration);
-            console.log("[payM] " + registration.paymentManager);
-            console.log("[payI] " + registration.paymentManager.instruments);
+            console.log(registration);
+            console.log(registration.paymentManager);
+            console.log(registration.paymentManager.instruments);
             registration.paymentManager.instruments.clear().then(() => {
               registration.paymentManager.instruments.set(instrumentKey, instrumentData);
             });
