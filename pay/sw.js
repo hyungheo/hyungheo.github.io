@@ -11,7 +11,7 @@ const swIcons = [{
 }];
 
 const swEnabledMethods = [
-  "https://hulpan.com/"
+  "https://hyungheo.github.io/pay"
 ];
 
 const swPayName = "HULPAN_PAY";
