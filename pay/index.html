@@ -27,8 +27,12 @@
         }
       })
       navigator.serviceWorker.register('sw.js', {scope: './pay'}).then((registration) => {
-        alert('service_registration update!');
-        registration.update();
+        registration.update().then((success) => {
+          alert('service_registration update!');
+          console.log("update success!" + success);
+        }).catch((error) => {
+          console.log("update failed! " + error);
+        });
       });
       alert('serviceWorker.registered success!');
     } else {
