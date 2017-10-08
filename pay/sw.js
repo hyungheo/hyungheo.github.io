@@ -23,6 +23,8 @@ const instrumentData = {
   icons: swIcons
 };
 
+const pm = self.registration.paymentManager;
+
 instrumentParam = { 
   instrumentKey,
   instrumentData 
@@ -39,7 +41,7 @@ function showNoti(msg) {
 }
 
 self.addEventListener('install', (event) => {
-  var pm = self.registration.paymentManager;
+  console.log("[SW Install] " + JSON.stringify(pm))
   console.log('[ServiceWorker] install event');
   // Perform install steps
   event.waitUntil(
@@ -48,15 +50,13 @@ self.addEventListener('install', (event) => {
     })
   );
   event.waitUntil(
-    console.log(JSON.stringify(pm))
-    //pm.paymentInstruments.set(instrumentParam)
+    pm.paymentInstruments.set(instrumentParam)
   );
 });
 
 self.addEventListener('fetch', (event) => {
   showNoti("TEST SHOW");
   console.log('[ServiceWorker] fetch event');
-  var pm = self.registration.paymentManager;
   console.log(JSON.stringify(pm));
   //event.respondWith();  
 });
