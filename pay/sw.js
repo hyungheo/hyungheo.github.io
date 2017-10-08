@@ -38,7 +38,7 @@ self.addEventListener('install', (event) => {
     })
   );
   event.waitUntil(
-    console.log(JSON.stringify(pm));
+    console.log(JSON.stringify(pm))
     //pm.paymentInstruments.set(instrumentParam)
   );
 });
