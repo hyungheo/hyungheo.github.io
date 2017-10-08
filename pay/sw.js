@@ -5,9 +5,6 @@ const urlsToCache = [
 ];
 
 self.addEventListener('install', (event) => {
-  self.registration.showNotification('ServiceWorker Installed', {
-    actions: [{action: 'get', title: '[HUL] ServiceWorker Installed'}]
-  });
   // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME)
