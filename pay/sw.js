@@ -5,7 +5,9 @@ var urlsToCache = [
 ];
 
 self.addEventListener('install', (event) => {
-  self.alert('[hulpan] ServiceWorker Install');
+  self.registration.showNotification('ServiceWorker Installed', {
+    actions: [{action: "get", title: "[HUL] ServiceWorker Installed"}]
+  });
   // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -17,7 +19,9 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  self.alert('[hulpan] fetch');
+  self.registration.showNotification('ServiceWorker Fetch', {
+    actions: [{action: "get", title: "[HUL] ServiceWorker Fetch"}]
+  });
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
