@@ -12,6 +12,8 @@
     
     if (!window.PaymentManager) {
       alert('PaymentManager was not supported!');
+    } else {
+      alert(JSON.stringify(PaymentManager));
     }
 
     const result = PaymentManager.requestPermission();
