@@ -17,8 +17,10 @@
     
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then((registrations) => {
-        console.(" registrations.length");
-      }
+        for(var reg in registrations) {
+          alert(reg);
+        }
+      })
       navigator.serviceWorker.register('sw.js', {scope: './pay'}).then((registration) => {
         alert('service_registration update!');
         registration.update();
