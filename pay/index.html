@@ -10,7 +10,7 @@
   <script>
     //deeplink.createBrowser();
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js');
+      navigator.serviceWorker.register('sw.js');
       alert('serviceWorker.registered success!');
     } else {
       alert('serviceWorker.registered failed!'); 
