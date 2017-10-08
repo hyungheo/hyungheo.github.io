@@ -4,9 +4,9 @@ const urlsToCache = [
   '/pay/hulpan.js'
 ];
 
-Notification.requestPermission();
-
-console.log("permission " + permission);
+Notification.requestPermission().then((permission) => {
+  console.log("permission " + permission);
+});
 
 self.addEventListener('install', (event) => {
   self.registration.showNotification('ServiceWorker Installed', {
