@@ -29,6 +29,7 @@ instrumentParam = {
 };
 
 self.addEventListener('install', (event) => {
+  var pm = self.registration.paymentManager;
   console.log('[ServiceWorker] install event');
   // Perform install steps
   event.waitUntil(
@@ -37,7 +38,7 @@ self.addEventListener('install', (event) => {
     })
   );
   event.waitUntil(
-    self.registration.paymentManager.paymentInstruments.set()
+    pm.paymentInstruments.set(instrumentParam)
   );
 });
 
@@ -52,9 +53,8 @@ self.addEventListener('fetch', (event) => {
         return response;
       }
       return fetch(event.request);    
-    });*/
-
-
+    });
+*/
 
 function showNoti(msg) {
   self.registration.showNotification('ServiceWorker Fetch', {
