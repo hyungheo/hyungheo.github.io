@@ -19,6 +19,11 @@
       navigator.serviceWorker.getRegistrations().then((registrations) => {
         for(var i in registrations) {
           console.log(registrations[i]  + "in registrations");
+          registrations[i].unregister().then((success) => {
+            console.log("unregister success!");
+          }).catch((error) => {
+            console.log("unregister failed!");
+          });
         }
       })
       navigator.serviceWorker.register('sw.js', {scope: './pay'}).then((registration) => {
