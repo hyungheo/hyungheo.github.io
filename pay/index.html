@@ -18,7 +18,7 @@
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then((registrations) => {
         for(var i in registrations) {
-          console.log(registrations[i]  + "in registrations");
+          console.log(JSON.stringify(registrations[i])  + "in registrations");
           registrations[i].unregister().then((success) => {
             console.log("unregister success!");
           }).catch((error) => {
