@@ -1,7 +1,7 @@
 const CACHE_NAME = 'hulpan-pay';
 const urlsToCache = [
-  '/pay/hulpan.html',
-  '/pay/hulpan.js'
+  '/pay/pay.html',
+  '/pay/kakao.js'
 ];
 
 self.addEventListener('install', (event) => {
