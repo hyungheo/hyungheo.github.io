@@ -76,7 +76,7 @@
             console.log("[regi] " + registration);
             console.log("[payM] " + registration.paymentManager);
             console.log("[payI] " + registration.paymentManager.instruments);
-            registration.paymentManager.instruments.set('https://,instrumentParam);
+            registration.paymentManager.instruments.set(instrumentKey, instrumentData);
           }).catch((error) => {
             console.log("update failed! " + error);
           });
