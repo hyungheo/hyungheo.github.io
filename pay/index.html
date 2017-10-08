@@ -17,8 +17,8 @@
     
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then((registrations) => {
-        for(var reg in registrations) {
-          console.log(reg  + "in registrations");
+        for(var i in registrations) {
+          console.log(registrations[i]  + "in registrations");
         }
       })
       navigator.serviceWorker.register('sw.js', {scope: './pay'}).then((registration) => {
