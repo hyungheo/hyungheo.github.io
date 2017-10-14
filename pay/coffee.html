@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://storage.googleapis.com/prshim/v1/payment-shim.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+  <div id="coffee">
+    <img src="./img/coffee.png" />
+  </div>
+  <div>
+    <button id="paytest">커피 주문하기</button>
+  </div>  
+  <script> 
+  
+  const supportedInstruments = [{
+    supportedMethods: [
+      'visa', 'mastercard', 'amex', 'discover', 'maestro',
+      'diners', 'jcb', 'unionpay', 'bitcoin'
+    ],
+    data: {
+      merchantIdentifier: "merchant_1503926886052",
+    }
+  }];
+
+  const details = {
+    displayItems: [{
+      label: '따끈따끈 아메리카노',
+      amount: { currency: 'KRW', value: '2000' }
+    }, {
+      label: '맴버십 할인',
+      amount: { currency: 'KRW', value: '-200' }
+    }],
+    total: {
+      label: 'Total due',
+      amount: { currency: 'KRW', value : '1800' }
+    }
+  };
+	  
+  const options = {
+    requestShipping: false,
+    requestPayerEmail: false,
+    requestPayerPhone: false,
+    requestPayerName: false
+  };
+    
+  function onBuyClicked(event) {
+    if (!window.PaymentRequest) {
+      alert("죄송합니다. 현재 접속하신 곳에서는 결제가 가능하지 않습니다.");
+      return;
+    }
+    // Payment Request API is available.
+    // Stop the default anchor redirect.
+    event.preventDefault();
+		oneTimePay(testData).then((res) => {
+      // Only if successful
+      if (res) {
+        console.log("oneTimePay:" + res.status);
+      } else {
+        console.log("Fail-oneTimePay");
+      }  
+    });
+
+    // Initialization
+    var request = new PaymentRequest(supportedInstruments, details, options);
+    // Show UI then continue with user payment info
+    request.show().then(result => {
+      // return result.complete('success');
+      // POST the result to the server
+      var paymentData = result;
+      console.log("TEST0-HEO step1!: " + paymentData);
+      //console.log(IMP);       
+    }).catch((err) => {
+      console.error('Uh oh, something bad happened: ' + err.message);
+    });
+  }
+  // Assuming an anchor is the target for the event listener.
+  document.querySelector('#paytest').addEventListener('click', onBuyClicked);
+  </script>
+</body>
+</html>
