@@ -52,26 +52,16 @@
     // Payment Request API is available.
     // Stop the default anchor redirect.
     event.preventDefault();
-		oneTimePay(testData).then((res) => {
-      // Only if successful
-      if (res) {
-        console.log("oneTimePay:" + res.status);
-      } else {
-        console.log("Fail-oneTimePay");
-      }  
-    });
-
     // Initialization
     var request = new PaymentRequest(supportedInstruments, details, options);
     // Show UI then continue with user payment info
     request.show().then(result => {
       // return result.complete('success');
       // POST the result to the server
-      var paymentData = result;
-      console.log("TEST0-HEO step1!: " + paymentData);
-      //console.log(IMP);       
+      alert("결제가 완료되었습니다.");
+      return result.complete('success');   
     }).catch((err) => {
-      console.error('Uh oh, something bad happened: ' + err.message);
+      return result.complete('fail');
     });
   }
   // Assuming an anchor is the target for the event listener.
