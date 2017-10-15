@@ -58,7 +58,8 @@
       alert("결제가 완료되었습니다.");
       return result.complete('success');   
     }).catch((err) => {
-      return result.complete('fail');
+      console.log(err);
+      return;
     });
   }
   // Assuming an anchor is the target for the event listener.
