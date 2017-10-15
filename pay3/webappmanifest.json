@@ -1,0 +1,11 @@
+{
+  "short_name": "B-PAY",
+  "name": "HULPAN_PAY",
+  "icons": [
+    {
+      "src": "./icon/hulpan.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    }
+  ]
+}

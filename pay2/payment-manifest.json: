@@ -1,0 +1,4 @@
+{
+  "default_applications": ["hyungheo.github.io/pay/webappmanifest.json"],
+  "supported_origins": "*"
+}

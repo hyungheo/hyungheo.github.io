@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--<script src="deeplink.js"></script>-->
+  <!--<link rel="payment-method-manifest" href="/pay/payment-manifest.json">-->
+  <link rel="manifest" href="/pay/webappmanifest.json">
+  <link rel="icon" href="/pay/icon/hulpan.png" type="image/png"/>
+</head>
+</head>
+<body>
+  <div id="root">
+    this is test for web-payment api
+  </div>
+  <script>
+    //deeplink.createBrowser();
+    
+    if (!window.PaymentManager) {
+      console.log('PaymentManager was not supported!');
+      alert('PaymentManager was not supported!');
+    }
+
+    /*
+    const result = window.PaymentManager.requestPermission();
+    if (result !== "granted") {
+      alert("PaymentManager " + result);
+    }*/
+    
+    const swIcons = [{
+      src: "icon/hulpan.png",
+      sizes: "48x48",
+      type: "image/png"
+    }];
+    const swEnabledMethods = [
+      "https://hyungheo.github.io/pay/"
+    ];
+    const swPayName = "B-PAY";
+    const instrumentKey = "c8126178-3bba-4d09-8f00-0771bcfd3b11";
+    const instrumentData = {
+      name: swPayName,
+      enabledMethods: swEnabledMethods,
+      icons: swIcons
+    };
+    
+    instrumentParam = {
+      instrumentKey,
+      instrumentData 
+    };
+    
+    Notification.requestPermission().then((permission) => {
+      console.log(permission);
+    }).catch((error) => {
+      console.log(error);
+    });
+    
+    var unregiHandler = function (resolve) {
+      console.log("unregister success!");
+      return Promise.resolve("success");
+    }
+    var unregiErrHandler = function (error) {
+      console.log("unregister failed! " + error);
+      return Promise.resolve("success");
+    }
+    
+    var unregiLists = [];
+    
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for(var i in registrations) {
+          console.log(JSON.stringify(registrations[i])  + "in registrations");
+          unregiLists.push(registrations[i].unregister().then(unregiHandler).catch(unregiErrHandler));
+        }
+      });
+      Promise.all(unregiLists).then(() => {
+        navigator.serviceWorker.register('sw.js', {scope: '.'}).then((registration) => {
+          registration.update().then((success) => {
+            console.log("update success!" + success);
+            console.log(registration);
+            console.log(registration.paymentManager);
+            console.log(registration.paymentManager.instruments);
+            registration.paymentManager.instruments.clear().then(() => {
+              registration.paymentManager.instruments.set(instrumentKey, instrumentData);
+            });
+          }).catch((error) => {
+            console.log("update failed! " + error);
+          });
+        });
+      });
+    } else {
+      alert('serviceWorker is not supperted!'); 
+    }  
+  </script>
+</body>
+</html>

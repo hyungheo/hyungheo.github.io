@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://storage.googleapis.com/prshim/v1/payment-shim.js"></script>
+  <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.4.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+  <div>
+    <button id="paytest">PAYTEST</button>
+  </div>  
+  <div>
+    <a id="kakao-login-btn"></a>
+    <a href="http://developers.kakao.com/logout"></a>
+  </div>
+  <script>
+  IMP.init('iamport');    
+ 
+  const testData = {
+    amount: 1, 
+    card_number: "1234-1234-1234-1234", 
+    expiry: "2019-01", 
+    birth: "801231", 
+    pwd_2digit: "00"
+  };
+      
+  const getTokenParam = {
+    imp_key: "imp_apikey",
+    imp_secret: "ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f"
+  }
+  
+  const supportedInstruments = [{
+    supportedMethods: [
+      'visa', 'mastercard', 'amex', 'discover', 'maestro',
+      'diners', 'jcb', 'unionpay', 'bitcoin'
+    ],
+    data: {
+      merchantIdentifier: "merchant_1503926886052",
+    }
+  }];
+
+  const details = {
+    displayItems: [{
+      label: '따끈따끈 아메리카노',
+      amount: { currency: 'KRW', value: '2000' }
+    }, {
+      label: '맴버십 할인',
+      amount: { currency: 'KRW', value: '-200' }
+    }],
+    total: {
+      label: 'Total due',
+      amount: { currency: 'KRW', value : '1800' }
+    }
+  };
+	  
+  const options = {
+    requestShipping: false,
+    requestPayerEmail: false,
+    requestPayerPhone: false,
+    requestPayerName: false
+  };
+	  
+  function getToken(formTest) {
+    return fetch('https://api.iamport.kr/users/getToken', { 
+      method: 'POST', 
+      mode: 'cors', 
+      body: formTest,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Access-Control-Allow-Origin': '*',
+      }
+    });  
+  }
+	
+  function oneTimePay(testData) {
+    console.log('oneTimePay()');
+    var data = JSON.stringify(testData)
+    console.log(data);
+    return fetch('https://hulpan.com/pay/onetime', {
+      method: 'POST',
+      credentials: 'include',
+      mode: 'cors',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+	'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
+        'Content-Type': 'application/json'
+      },
+      body: data
+    });
+  }
+  
+  function onBuyClicked(event) {
+    if (!window.PaymentRequest) {
+      return;
+    }
+    // Payment Request API is available.
+    // Stop the default anchor redirect.
+    event.preventDefault();
+		oneTimePay(testData).then((res) => {
+      // Only if successful
+      if (res) {
+        console.log("TEST-HEO step2!:" + res.status);
+      } else {
+        console.log("Fail-oneTimePay");
+      }  
+    });
+
+    // Initialization
+    var request = new PaymentRequest(supportedInstruments, details, options);
+    // Show UI then continue with user payment info
+    request.show().then(result => {
+      // return result.complete('success');
+      // POST the result to the server
+      var paymentData = result;
+      console.log("TEST0-HEO step1!: " + paymentData);
+      //console.log(IMP);       
+    }).catch((err) => {
+      console.error('Uh oh, something bad happened: ' + err.message);
+    });
+  }
+  // Assuming an anchor is the target for the event listener.
+  document.querySelector('#paytest').addEventListener('click', onBuyClicked);
+  </script>
+</body>
+</html>
